@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveUser } from '../redux/actions';
+import fecthAPITriviaToken from '../services/TriviaAPI';
 
 class Login extends Component {
   constructor(props) {
@@ -31,9 +32,12 @@ class Login extends Component {
     });
   }
 
-  handleClick() {
-    const { saveData } = this.props;
+  async handleClick() {
+    const { saveData, history } = this.props;
     saveData(this.state);
+    history.push('/gameplay');
+    const token = await fecthAPITriviaToken();
+    localStorage.setItem('token', token);
   }
 
   render() {
@@ -72,6 +76,10 @@ class Login extends Component {
 
 Login.propTypes = {
   saveData: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    history: PropTypes.string,
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
