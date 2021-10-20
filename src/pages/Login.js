@@ -1,0 +1,81 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { saveUser } from '../redux/actions';
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      email: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.disableButton = this.disableButton.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  disableButton() {
+    const { name, email } = this.state;
+    if (name.length > 0 && email.length > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  handleChange({ target: { name, value } }) {
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleClick() {
+    const { saveData } = this.props;
+    saveData(this.state);
+  }
+
+  render() {
+    const { name, email } = this.state;
+    const disableFunction = this.disableButton();
+    return (
+      <main>
+        <input
+          type="text"
+          data-testid="input-player-name"
+          placeholder="Insira seu nome"
+          value={ name }
+          name="name"
+          onChange={ this.handleChange }
+        />
+        <input
+          type="text"
+          data-testid="input-gravatar-email"
+          placeholder="Insira seu email"
+          value={ email }
+          name="email"
+          onChange={ this.handleChange }
+        />
+        <button
+          data-testid="btn-play"
+          type="button"
+          disabled={ disableFunction }
+          onClick={ this.handleClick }
+        >
+          Jogar
+        </button>
+      </main>
+    );
+  }
+}
+
+Login.propTypes = {
+  saveData: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  saveData: (data) => dispatch(saveUser(data)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
