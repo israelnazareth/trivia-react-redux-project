@@ -41,35 +41,47 @@ class Login extends Component {
   }
 
   render() {
+    const { history } = this.props;
     const { name, email } = this.state;
     const disableFunction = this.disableButton();
     return (
-      <main>
-        <input
-          type="text"
-          data-testid="input-player-name"
-          placeholder="Insira seu nome"
-          value={ name }
-          name="name"
-          onChange={ this.handleChange }
-        />
-        <input
-          type="text"
-          data-testid="input-gravatar-email"
-          placeholder="Insira seu email"
-          value={ email }
-          name="email"
-          onChange={ this.handleChange }
-        />
-        <button
-          data-testid="btn-play"
-          type="button"
-          disabled={ disableFunction }
-          onClick={ this.handleClick }
-        >
-          Jogar
-        </button>
-      </main>
+      <>
+        <main>
+          <input
+            type="text"
+            data-testid="input-player-name"
+            placeholder="Insira seu nome"
+            value={ name }
+            name="name"
+            onChange={ this.handleChange }
+          />
+          <input
+            type="text"
+            data-testid="input-gravatar-email"
+            placeholder="Insira seu email"
+            value={ email }
+            name="email"
+            onChange={ this.handleChange }
+          />
+          <button
+            data-testid="btn-play"
+            type="button"
+            disabled={ disableFunction }
+            onClick={ this.handleClick }
+          >
+            Jogar
+          </button>
+        </main>
+        <footer>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => history.push('/settings') }
+          >
+            Settings
+          </button>
+        </footer>
+      </>
     );
   }
 }
