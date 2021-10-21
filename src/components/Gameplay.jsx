@@ -37,10 +37,10 @@ export default class Gameplay extends Component {
           <h2 data-testid="question-category">{results[controller].category}</h2>
           <h3 data-testid="question-text">{results[controller].question}</h3>
           <ul>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+            <button data-testid="correct-answer">{results[controller].correct_answer}</button>
+            <button data-testid="wrong-answer-[0]">{results[controller].incorrect_answers[0]}</button>
+            <button data-testid="wrong-answer-[1]">{results[controller].incorrect_answers[1]}</button>
+            <button data-testid="wrong-answer-[2]">{results[controller].incorrect_answers[2]}</button>
           </ul>
         </main>
       )
