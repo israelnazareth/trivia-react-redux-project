@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveUser } from '../redux/actions';
 import fecthAPITriviaToken from '../services/TriviaAPI';
+import fetchGravatarAPI from '../services/GravatarAPI';
 
 class Login extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Login extends Component {
     this.state = {
       name: '',
       email: '',
+      url: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,10 +36,15 @@ class Login extends Component {
 
   async handleClick() {
     const { saveData, history } = this.props;
+    const { email } = this.state;
+    const token = await fecthAPITriviaToken();
+    const gravatar = await fetchGravatarAPI(email);
+    this.setState({
+      url: gravatar,
+    });
+    localStorage.setItem('token', token);
     saveData(this.state);
     history.push('/gameplay');
-    const token = await fecthAPITriviaToken();
-    localStorage.setItem('token', token);
   }
 
   render() {
