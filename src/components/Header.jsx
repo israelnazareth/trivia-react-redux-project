@@ -31,7 +31,7 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   name: state.userReducer.name,
-  avatar: state.userReducer.url,
+  avatar: state.userReducer.avatar,
 });
 
 export default connect(mapStateToProps)(Header);
