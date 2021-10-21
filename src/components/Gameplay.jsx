@@ -30,8 +30,8 @@ export default class Gameplay extends Component {
 
   render() {
     const { results, controller } = this.state;
-    console.log(results[controller]);
-    if (results.length !== 0) {
+    const nullNumber = -1;
+    if (results.length > nullNumber) {
       return (
         <main>
           <h2 data-testid="question-category">{results[controller].category}</h2>
