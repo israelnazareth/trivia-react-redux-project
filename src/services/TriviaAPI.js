@@ -4,4 +4,11 @@ async function fecthAPITriviaToken() {
   return response.token;
 }
 
-export default fecthAPITriviaToken;
+async function fetchTriviaQuestions() {
+  const localToken = localStorage.getItem('token');
+  const API = await fetch(`https://opentdb.com/api.php?amount=5&token=${localToken}`);
+  const response = await API.json();
+  return response.results;
+}
+
+export { fecthAPITriviaToken, fetchTriviaQuestions };

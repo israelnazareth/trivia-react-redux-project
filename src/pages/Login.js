@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveUser } from '../redux/actions';
-import fecthAPITriviaToken from '../services/TriviaAPI';
+import { fecthAPITriviaToken } from '../services/TriviaAPI';
 import fetchGravatarAPI from '../services/GravatarAPI';
 
 class Login extends Component {
@@ -12,7 +12,7 @@ class Login extends Component {
     this.state = {
       name: '',
       email: '',
-      url: '',
+      avatar: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,7 +40,7 @@ class Login extends Component {
     const token = await fecthAPITriviaToken();
     const gravatar = await fetchGravatarAPI(email);
     this.setState({
-      url: gravatar,
+      avatar: gravatar,
     });
     localStorage.setItem('token', token);
     saveData(this.state);

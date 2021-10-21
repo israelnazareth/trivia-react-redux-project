@@ -3,7 +3,7 @@ import { SAVE_USER } from '../actions';
 const INITIAL_STATE = {
   name: '',
   email: '',
-  url: '',
+  avatar: '',
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     return {
       name: action.data.name,
       email: action.data.email,
-      url: action.data.url,
+      avatar: action.data.avatar,
     };
   default:
     return state;

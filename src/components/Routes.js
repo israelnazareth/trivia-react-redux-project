@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router';
 
 import React, { Component } from 'react';
 import Login from '../pages/Login';
-import Gameplay from '../pages/Gameplay';
+import Mainpage from '../pages/Mainpage';
 import Settings from '../pages/Settings';
 
 export default class Routes extends Component {
@@ -10,7 +10,7 @@ export default class Routes extends Component {
     return (
       <Switch>
         <Route path="/settings" component={ Settings } />
-        <Route path="/gameplay" component={ Gameplay } />
+        <Route path="/gameplay" component={ Mainpage } />
         <Route path="/" component={ Login } />
       </Switch>
     );
