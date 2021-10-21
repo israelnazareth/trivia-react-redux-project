@@ -11,4 +11,4 @@ async function fetchTriviaQuestions() {
   return response.results;
 }
 
-export { fecthAPITriviaToken, fetchTriviaQuestions }; 
+export { fecthAPITriviaToken, fetchTriviaQuestions };

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
-    const { email, name, avatar } = this.props;
+    const { name, avatar } = this.props;
     return (
       <header>
         <img
@@ -26,13 +26,11 @@ class Header extends Component {
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   name: state.userReducer.name,
-  email: state.userReducer.email,
   avatar: state.userReducer.url,
 });
 
