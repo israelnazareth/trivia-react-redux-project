@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
-    const { email, name, url } = this.props;
-    console.log(name, email, url);
+    const { email, name, avatar } = this.props;
     return (
       <header>
         <img
           data-testid="header-profile-picture"
-          src={ url }
+          src={ avatar }
           alt="imagem do jogador"
         />
         <br />
@@ -28,13 +27,13 @@ class Header extends Component {
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   name: state.userReducer.name,
   email: state.userReducer.email,
-  url: state.userReducer.url,
+  avatar: state.userReducer.url,
 });
 
 export default connect(mapStateToProps)(Header);

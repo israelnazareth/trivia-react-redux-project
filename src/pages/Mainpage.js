@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import Gameplay from '../components/Gameplay';
 
-class Gameplay extends Component {
+class Mainpage extends Component {
   render() {
     return (
       <div>
-        <h1>
-          gameplay
-        </h1>
         <Header />
+        <Gameplay />
       </div>
     );
   }
 }
 
-export default Gameplay;
+export default Mainpage;
