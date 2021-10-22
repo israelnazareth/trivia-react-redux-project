@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveCounter } from '../redux/actions';
+import { saveCounter, disableButton } from '../redux/actions';
 
 class Timer extends Component {
   constructor(props) {
@@ -13,21 +13,23 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    const oneSeg = 1000;
+    const { interval } = this.props;
     this.intervalID = setInterval(() => {
       this.setState((prevState) => ({
         timer: prevState.timer - 1,
       }));
-    }, oneSeg);
+    }, interval);
   }
 
   componentDidUpdate(_, prevState) {
-    const { saveTime } = this.props;
+    const { saveTime, dispatchBtnDisable } = this.props;
     const timeLimit = 0;
     if (prevState.timer === timeLimit) {
       saveTime(this.state);
       this.timerSetState();
+      dispatchBtnDisable(this.state);
     }
+    saveTime(this.state);
   }
 
   timerSetState() {
@@ -39,7 +41,6 @@ class Timer extends Component {
 
   render() {
     const { timer } = this.state;
-    console.log(timer);
     return (
       <div>
         { timer }
@@ -50,10 +51,17 @@ class Timer extends Component {
 
 Timer.propTypes = {
   saveTime: PropTypes.func.isRequired,
+  interval: PropTypes.number.isRequired,
+  dispatchBtnDisable: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   saveTime: (data) => dispatch(saveCounter(data)),
+  dispatchBtnDisable: () => dispatch(disableButton()),
 });
 
-export default connect(null, mapDispatchToProps)(Timer);
+const mapStateToProps = (state) => ({
+  interval: state.triviaReducer.interval,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);

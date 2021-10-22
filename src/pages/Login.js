@@ -18,6 +18,52 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.disableButton = this.disableButton.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.setInitialLocalStorage = this.setInitialLocalStorage.bind(this);
+  }
+
+  componentDidMount() {
+    this.setInitialLocalStorage();
+  }
+
+  setLocalStorage(email, name, gravatar) {
+    localStorage.setItem('state', JSON.stringify({
+      player: {
+        name,
+        assertions: 0,
+        score: 0,
+        gravatarEmail: email,
+      } }));
+
+    localStorage.setItem('ranking', JSON.stringify([{
+      name: '',
+      score: 0,
+      picture: gravatar,
+    }]));
+  }
+
+  setInitialLocalStorage() {
+    if (localStorage.getItem('state') === null) {
+      localStorage.setItem('state', JSON.stringify({
+        player: {
+          name: '',
+          assertions: 0,
+          score: 0,
+          gravatarEmail: '',
+        } }));
+    }
+    if (localStorage.getItem('ranking') === null) {
+      localStorage.setItem('ranking', JSON.stringify([{
+        name: '',
+        score: 0,
+        picture: '',
+      }]));
+    }
+  }
+
+  handleChange({ target: { name, value } }) {
+    this.setState({
+      [name]: value,
+    });
   }
 
   disableButton() {
@@ -28,15 +74,9 @@ class Login extends Component {
     return true;
   }
 
-  handleChange({ target: { name, value } }) {
-    this.setState({
-      [name]: value,
-    });
-  }
-
   async handleClick() {
     const { saveData, history } = this.props;
-    const { email } = this.state;
+    const { email, name } = this.state;
     const token = await fecthAPITriviaToken();
     const gravatar = await fetchGravatarAPI(email);
     this.setState({
@@ -45,6 +85,7 @@ class Login extends Component {
     localStorage.setItem('token', token);
     saveData(this.state);
     history.push('/gameplay');
+    this.setLocalStorage(email, name, gravatar);
   }
 
   render() {

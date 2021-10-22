@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class ButtonAnswer extends Component {
   render() {
-    const { timer, results, handleClick } = this.props;
+    const { results, handleClick, btnDisable } = this.props;
     return (
       <ul>
         <button
@@ -12,7 +12,7 @@ class ButtonAnswer extends Component {
           type="button"
           data-testid="correct-answer"
           onClick={ handleClick }
-          disabled={ timer === 0 ? true : '' }
+          disabled={ btnDisable }
         >
           {results.correct_answer}
         </button>
@@ -21,7 +21,7 @@ class ButtonAnswer extends Component {
           type="button"
           data-testid="wrong-answer-[0]"
           onClick={ handleClick }
-          disabled={ timer === 0 ? true : '' }
+          disabled={ btnDisable }
         >
           {results.incorrect_answers[0]}
         </button>
@@ -30,7 +30,7 @@ class ButtonAnswer extends Component {
           type="button"
           data-testid="wrong-answer-[1]"
           onClick={ handleClick }
-          disabled={ timer === 0 ? true : '' }
+          disabled={ btnDisable }
         >
           {results.incorrect_answers[1]}
         </button>
@@ -39,7 +39,7 @@ class ButtonAnswer extends Component {
           type="button"
           data-testid="wrong-answer-[2]"
           onClick={ handleClick }
-          disabled={ timer === 0 ? true : '' }
+          disabled={ btnDisable }
         >
           {results.incorrect_answers[2]}
         </button>
@@ -54,11 +54,11 @@ ButtonAnswer.propTypes = {
     correct_answer: PropTypes.string,
     incorrect_answers: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  timer: PropTypes.number.isRequired,
+  btnDisable: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  timer: state.triviaReducer.timer,
+  btnDisable: state.triviaReducer.btnDisable,
 });
 
 export default connect(mapStateToProps)(ButtonAnswer);
