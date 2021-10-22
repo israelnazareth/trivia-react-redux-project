@@ -13,11 +13,13 @@ class Gameplay extends Component {
     this.state = {
       results: {},
       controller: 0,
+      showButton: false,
     };
 
     this.fechting = this.fechting.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.totalScore = this.totalScore.bind(this);
+    this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +56,21 @@ class Gameplay extends Component {
         score,
         gravatarEmail,
       } }));
+    this.setState({
+      showButton: true,
+    });
+  }
+
+  handleNextButtonClick() {
+    this.setState((prevState) => ({
+      controller: prevState.controller + 1,
+      showButton: false,
+    }));
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+      button.style.border = '';
+      button.disabled = false;
+    });
   }
 
   totalScore() {
@@ -74,7 +91,7 @@ class Gameplay extends Component {
   }
 
   render() {
-    const { results, controller } = this.state;
+    const { results, controller, showButton } = this.state;
     const nullNumber = -1;
     if (results.length > nullNumber) {
       return (
@@ -86,6 +103,15 @@ class Gameplay extends Component {
             results={ results[controller] }
           />
           <Timer />
+          { showButton
+            ? (
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={ this.handleNextButtonClick }
+              >
+                Próxima Pergunta
+              </button>) : ''}
         </main>
       );
     }
