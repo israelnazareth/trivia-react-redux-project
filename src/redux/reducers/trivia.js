@@ -1,7 +1,7 @@
 import { SAVE_COUNTER } from '../actions';
 
 const INITIAL_STATE = {
-  timer: '',
+  timer: 30,
 };
 
 const triviaReducer = (state = INITIAL_STATE, action) => {

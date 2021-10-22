@@ -8,11 +8,8 @@ class Timer extends Component {
     super(props);
 
     this.state = {
-      timer: 5,
+      timer: 30,
     };
-
-    /*     this.updateTimer = this.updateTimer.bind(this);
-    this.setTimeState = this.setTimeState.bind(this); */
   }
 
   componentDidMount() {
