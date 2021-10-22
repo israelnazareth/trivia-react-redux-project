@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
+import ButtonAnswer from './ButtonAnswer';
+import Timer from './Timer';
 
-export default class Gameplay extends Component {
+class Gameplay extends Component {
   constructor(props) {
     super(props);
 
@@ -34,7 +36,6 @@ export default class Gameplay extends Component {
       } else {
         button.style.border = '3px solid rgb(255, 0, 0)';
       }
-      console.log(button);
     });
   }
 
@@ -46,43 +47,16 @@ export default class Gameplay extends Component {
         <main>
           <h2 data-testid="question-category">{results[controller].category}</h2>
           <h3 data-testid="question-text">{results[controller].question}</h3>
-          <ul>
-            <button
-              className="correct"
-              type="button"
-              data-testid="correct-answer"
-              onClick={ this.handleClick }
-            >
-              {results[controller].correct_answer}
-            </button>
-            <button
-              className="wrong"
-              type="button"
-              data-testid="wrong-answer-[0]"
-              onClick={ this.handleClick }
-            >
-              {results[controller].incorrect_answers[0]}
-            </button>
-            <button
-              className="wrong"
-              type="button"
-              data-testid="wrong-answer-[1]"
-              onClick={ this.handleClick }
-            >
-              {results[controller].incorrect_answers[1]}
-            </button>
-            <button
-              className="wrong"
-              type="button"
-              data-testid="wrong-answer-[2]"
-              onClick={ this.handleClick }
-            >
-              {results[controller].incorrect_answers[2]}
-            </button>
-          </ul>
+          <ButtonAnswer
+            handleClick={ this.handleClick }
+            results={ results[controller] }
+          />
+          <Timer />
         </main>
       );
     }
     return <p>Loading...</p>;
   }
 }
+
+export default connect(null)(Gameplay);
