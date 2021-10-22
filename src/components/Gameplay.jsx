@@ -1,8 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
+import Timer from './Timer';
 
-export default class Gameplay extends Component {
+class Gameplay extends Component {
   constructor(props) {
     super(props);
 
@@ -13,6 +16,7 @@ export default class Gameplay extends Component {
 
     this.fechting = this.fechting.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.disableButton = this.disableButton.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +38,11 @@ export default class Gameplay extends Component {
       } else {
         button.style.border = '3px solid rgb(255, 0, 0)';
       }
-      console.log(button);
     });
   }
 
   render() {
+    const { timer } = this.props;
     const { results, controller } = this.state;
     const nullNumber = -1;
     if (results.length > nullNumber) {
@@ -52,6 +56,7 @@ export default class Gameplay extends Component {
               type="button"
               data-testid="correct-answer"
               onClick={ this.handleClick }
+              disabled={ timer === 0 ? true : '' }
             >
               {results[controller].correct_answer}
             </button>
@@ -60,6 +65,7 @@ export default class Gameplay extends Component {
               type="button"
               data-testid="wrong-answer-[0]"
               onClick={ this.handleClick }
+              disabled={ timer === 0 ? true : '' }
             >
               {results[controller].incorrect_answers[0]}
             </button>
@@ -68,6 +74,7 @@ export default class Gameplay extends Component {
               type="button"
               data-testid="wrong-answer-[1]"
               onClick={ this.handleClick }
+              disabled={ timer === 0 ? true : '' }
             >
               {results[controller].incorrect_answers[1]}
             </button>
@@ -76,13 +83,25 @@ export default class Gameplay extends Component {
               type="button"
               data-testid="wrong-answer-[2]"
               onClick={ this.handleClick }
+              disabled={ timer === 0 ? true : '' }
             >
               {results[controller].incorrect_answers[2]}
             </button>
           </ul>
+          <Timer />
         </main>
       );
     }
     return <p>Loading...</p>;
   }
 }
+
+Gameplay.propTypes = {
+  timer: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  timer: state.triviaReducer.timer,
+});
+
+export default connect(mapStateToProps)(Gameplay);
