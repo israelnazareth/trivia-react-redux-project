@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
 import ButtonAnswer from './ButtonAnswer';
 import Timer from './Timer';
-import { stopInterval } from '../redux/actions';
+import { stopInterval, restartTimer } from '../redux/actions';
 
 class Gameplay extends Component {
   constructor(props) {
@@ -62,6 +62,7 @@ class Gameplay extends Component {
   }
 
   handleNextButtonClick() {
+    const { dispatchRestartTimer } = this.props;
     this.setState((prevState) => ({
       controller: prevState.controller + 1,
       showButton: false,
@@ -71,6 +72,7 @@ class Gameplay extends Component {
       button.style.border = '';
       button.disabled = false;
     });
+    dispatchRestartTimer();
   }
 
   totalScore() {
@@ -128,6 +130,7 @@ Gameplay.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchStopInterval: () => dispatch(stopInterval()),
+  dispatchRestartTimer: () => dispatch(restartTimer()),
 });
 
 const mapStateToProps = (state) => ({

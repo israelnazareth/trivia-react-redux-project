@@ -1,4 +1,4 @@
-import { SAVE_COUNTER, STOP_INTERVAL, DISABLE_BUTTON } from '../actions';
+import { SAVE_COUNTER, STOP_INTERVAL, DISABLE_BUTTON, RESTART_TIMER } from '../actions';
 
 const INITIAL_STATE = {
   timer: 30,
@@ -22,6 +22,11 @@ const triviaReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       btnDisable: true,
+    };
+  case RESTART_TIMER:
+    return {
+      ...state,
+      timer: 30,
     };
   default:
     return state;
