@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class ButtonAnswer extends Component {
   render() {
     const { results, handleClick, btnDisable } = this.props;
-    console.log(results.incorrect_answers);
     return (
       <ul>
         <button
@@ -17,7 +16,7 @@ class ButtonAnswer extends Component {
         >
           {results.correct_answer}
         </button>
-        { results.incorrect_answers.map((botao, index) => (
+        { results.incorrect_answers.map((button, index) => (
           <button
             key={ index }
             className="wrong"
@@ -26,7 +25,7 @@ class ButtonAnswer extends Component {
             onClick={ handleClick }
             disabled={ btnDisable }
           >
-            { botao }
+            { button }
           </button>
         ))}
       </ul>

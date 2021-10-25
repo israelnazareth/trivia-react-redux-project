@@ -35,7 +35,7 @@ class Login extends Component {
       } }));
 
     localStorage.setItem('ranking', JSON.stringify([{
-      name: '',
+      name,
       score: 0,
       picture: gravatar,
     }]));
