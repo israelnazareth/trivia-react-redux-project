@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
 import ButtonAnswer from './ButtonAnswer';
 import Timer from './Timer';
-import { stopInterval, restartTimer } from '../redux/actions';
+import { stopInterval, restartTimer, nextQuestion } from '../redux/actions';
 
 class Gameplay extends Component {
   constructor(props) {
@@ -62,11 +62,16 @@ class Gameplay extends Component {
   }
 
   handleNextButtonClick() {
-    const { dispatchRestartTimer } = this.props;
-    this.setState((prevState) => ({
-      controller: prevState.controller + 1,
-      showButton: false,
-    }));
+    const { dispatchRestartTimer, dispatchController } = this.props;
+    const { controller } = this.state;
+    const limitController = 4;
+    dispatchController(nextQuestion());
+    if (controller < limitController) {
+      this.setState((prevState) => ({
+        controller: prevState.controller + 1,
+        showButton: false,
+      }));
+    }
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
       button.style.border = '';
@@ -123,6 +128,8 @@ class Gameplay extends Component {
 
 Gameplay.propTypes = {
   dispatchStopInterval: PropTypes.func.isRequired,
+  dispatchRestartTimer: PropTypes.func.isRequired,
+  dispatchController: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
   gravatarEmail: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -131,12 +138,14 @@ Gameplay.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   dispatchStopInterval: () => dispatch(stopInterval()),
   dispatchRestartTimer: () => dispatch(restartTimer()),
+  dispatchController: () => dispatch(nextQuestion()),
 });
 
 const mapStateToProps = (state) => ({
   timer: state.triviaReducer.timer,
   name: state.userReducer.name,
   gravatarEmail: state.userReducer.email,
+  controller: state.triviaReducer.globalController,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gameplay);
