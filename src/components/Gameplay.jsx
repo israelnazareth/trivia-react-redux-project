@@ -46,14 +46,16 @@ class Gameplay extends Component {
     });
     dispatchStopInterval();
     const parcialScore = JSON.parse(localStorage.getItem('state'));
-    let { score } = parcialScore.player;
+    let { score, assertions } = parcialScore.player;
     if (target.className === 'correct') {
       score += this.totalScore();
+      assertions += 1;
     }
     localStorage.setItem('state', JSON.stringify({
       player: {
         name,
         score,
+        assertions,
         gravatarEmail,
       } }));
     this.setState({
