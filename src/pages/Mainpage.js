@@ -8,11 +8,12 @@ import Feedback from './Feedback';
 class Mainpage extends Component {
   render() {
     const maxQuestion = 5;
-    const { globalController } = this.props;
+    const { globalController, history } = this.props;
     return (
       <div>
         <Header />
-        { (globalController < maxQuestion) ? <Gameplay /> : <Feedback /> }
+        { (globalController < maxQuestion)
+          ? <Gameplay /> : <Feedback history={ history } /> }
       </div>
     );
   }
@@ -20,6 +21,7 @@ class Mainpage extends Component {
 
 Mainpage.propTypes = {
   globalController: PropTypes.number.isRequired,
+  history: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
