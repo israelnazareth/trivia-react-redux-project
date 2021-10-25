@@ -15,4 +15,4 @@ export const disableButton = (data) => ({ type: DISABLE_BUTTON, data });
 
 export const restartTimer = () => ({ type: RESTART_TIMER });
 
-export const nextQuestion = () => ({ type: NEXT_QUESTION });
+export const nextQuestion = (data) => ({ type: NEXT_QUESTION, data });

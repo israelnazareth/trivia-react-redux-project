@@ -65,7 +65,11 @@ class Gameplay extends Component {
     const { dispatchRestartTimer, dispatchController } = this.props;
     const { controller } = this.state;
     const limitController = 4;
-    dispatchController(nextQuestion());
+    const getScore = JSON.parse(localStorage.getItem('state'));
+    const { player: { score } } = getScore;
+    console.log(score);
+    console.log(typeof score);
+    dispatchController(nextQuestion(score));
     if (controller < limitController) {
       this.setState((prevState) => ({
         controller: prevState.controller + 1,
@@ -138,7 +142,7 @@ Gameplay.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   dispatchStopInterval: () => dispatch(stopInterval()),
   dispatchRestartTimer: () => dispatch(restartTimer()),
-  dispatchController: () => dispatch(nextQuestion()),
+  dispatchController: (data) => dispatch(nextQuestion(data)),
 });
 
 const mapStateToProps = (state) => ({

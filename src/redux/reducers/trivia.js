@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   interval: 1000,
   btnDisable: false,
   globalController: 0,
+  score: 0,
 };
 
 const triviaReducer = (state = INITIAL_STATE, action) => {
@@ -39,6 +40,7 @@ const triviaReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       globalController: state.globalController + 1,
+      score: action.data.data,
     };
   default:
     return state;
