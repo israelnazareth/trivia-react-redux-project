@@ -7,23 +7,17 @@ class Feedback extends Component {
   constructor(props) {
     super(props);
 
-    this.resetGameAndRedirectToHome = this.resetGameAndRedirectToHome.bind(this);
-    this.resetGameAndRedirectToRanking = this.resetGameAndRedirectToRanking.bind(this);
+    this.resetGame = this.resetGame.bind(this);
   }
 
-  resetGameAndRedirectToHome() {
+  resetGame() {
     const { dispatchResetGame, history } = this.props;
     dispatchResetGame();
     history.push('/');
   }
 
-  resetGameAndRedirectToRanking() {
-    const { dispatchResetGame, history } = this.props;
-    dispatchResetGame();
-    history.push('/ranking');
-  }
-
   render() {
+    const { history } = this.props;
     const getStorage = JSON.parse(localStorage.getItem('state'));
     const { player: { score, assertions } } = getStorage;
     const numberOfAssertions = 3;
@@ -40,14 +34,14 @@ class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-play-again"
-          onClick={ this.resetGameAndRedirectToHome }
+          onClick={ this.resetGame }
         >
           Jogar novamente
         </button>
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={ this.resetGameAndRedirectToRanking }
+          onClick={ () => history.push('/ranking') }
         >
           Ranking
         </button>

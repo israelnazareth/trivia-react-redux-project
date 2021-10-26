@@ -80,8 +80,7 @@ class Gameplay extends Component {
       const getRanking = JSON.parse(localStorage.getItem('ranking'));
       const getRankingLength = getRanking.length - 1;
       const actualGame = { ...getRanking[getRankingLength], score };
-      console.log(actualGame);
-      localStorage.setItem('ranking', JSON.stringify([getRanking, actualGame]));
+      localStorage.setItem('ranking', JSON.stringify([actualGame]));
     }
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {

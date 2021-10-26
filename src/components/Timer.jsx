@@ -25,12 +25,10 @@ class Timer extends Component {
 
   componentDidUpdate(_, prevState) {
     const { saveTime, dispatchBtnDisable } = this.props;
-    const { timer } = this.state;
     const timeLimit = 0;
-    if (timer === timeLimit) {
-      saveTime(prevState);
+    if (prevState.timer === timeLimit) {
+      saveTime(this.state);
       dispatchBtnDisable(this.state);
-      clearInterval(this.intervalID);
     }
   }
 
