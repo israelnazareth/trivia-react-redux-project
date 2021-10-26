@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveCounter, disableButton } from '../redux/actions';
+import { saveCounter, disableButton, stopInterval } from '../redux/actions';
 
 class Timer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      timer: 5,
+      timer: 30,
     };
 
     this.saveTimeClick = this.saveTimeClick.bind(this);
@@ -24,12 +24,13 @@ class Timer extends Component {
   }
 
   componentDidUpdate() {
-    const { saveTime, dispatchBtnDisable } = this.props;
+    const { saveTime, dispatchBtnDisable, dispatchStopInterval } = this.props;
     const { timer } = this.state;
     const timeLimit = 0;
     if (timer === timeLimit) {
       saveTime(this.state);
       dispatchBtnDisable(this.state);
+      dispatchStopInterval();
       clearInterval(this.intervalID);
     }
   }
@@ -57,11 +58,13 @@ class Timer extends Component {
 Timer.propTypes = {
   saveTime: PropTypes.func.isRequired,
   dispatchBtnDisable: PropTypes.func.isRequired,
+  dispatchStopInterval: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   saveTime: (data) => dispatch(saveCounter(data)),
   dispatchBtnDisable: () => dispatch(disableButton()),
+  dispatchStopInterval: () => dispatch(stopInterval()),
 });
 
 export default connect(null, mapDispatchToProps)(Timer);
