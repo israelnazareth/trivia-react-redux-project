@@ -35,7 +35,6 @@ class Login extends Component {
       } }));
 
     const getRanking = JSON.parse(localStorage.getItem('ranking'));
-    console.log(getRanking);
     localStorage.setItem('ranking', JSON.stringify([...getRanking, {
       name,
       score: 0,
