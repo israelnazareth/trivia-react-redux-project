@@ -23,12 +23,14 @@ class Timer extends Component {
     }, ONE_SECOND);
   }
 
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate() {
     const { saveTime, dispatchBtnDisable } = this.props;
+    const { timer } = this.state;
     const timeLimit = 0;
-    if (prevState.timer === timeLimit) {
+    if (timer === timeLimit) {
       saveTime(this.state);
       dispatchBtnDisable(this.state);
+      clearInterval(this.intervalID);
     }
   }
 

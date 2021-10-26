@@ -10,8 +10,8 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      name: 'Lucas',
-      email: 'lucas@trybe.com',
+      name: '',
+      email: '',
       avatar: '',
     };
 
@@ -73,6 +73,7 @@ class Login extends Component {
   }
 
   async handleClick() {
+    this.setInitialLocalStorage();
     const { saveData, history } = this.props;
     const { email, name } = this.state;
     const token = await fecthAPITriviaToken();

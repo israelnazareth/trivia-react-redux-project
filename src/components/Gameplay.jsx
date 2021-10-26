@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
 import ButtonAnswer from './ButtonAnswer';
 import Timer from './Timer';
-import { stopInterval, nextQuestion } from '../redux/actions';
+import { stopInterval, nextQuestion, disableButton } from '../redux/actions';
 
 class Gameplay extends Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Gameplay extends Component {
     this.state = {
       results: {},
       controller: 0,
-      showButton: false,
     };
 
     this.fechting = this.fechting.bind(this);
@@ -35,7 +34,7 @@ class Gameplay extends Component {
 
   handleClick({ target }) {
     const buttons = document.querySelectorAll('button');
-    const { dispatchStopInterval, name, gravatarEmail } = this.props;
+    const { dispatchStopInterval, name, gravatarEmail, dispatchDisableBtn } = this.props;
     buttons.forEach((button) => {
       button.disabled = true;
       if (button.className === 'correct') {
@@ -44,6 +43,7 @@ class Gameplay extends Component {
         button.style.border = '3px solid rgb(255, 0, 0)';
       }
     });
+    dispatchDisableBtn();
     dispatchStopInterval();
     const parcialScore = JSON.parse(localStorage.getItem('state'));
     let { score, assertions } = parcialScore.player;
@@ -59,9 +59,6 @@ class Gameplay extends Component {
         assertions,
         gravatarEmail,
       } }));
-    this.setState({
-      showButton: true,
-    });
   }
 
   handleNextButtonClick() {
@@ -74,13 +71,13 @@ class Gameplay extends Component {
     if (controller < limitController) {
       this.setState((prevState) => ({
         controller: prevState.controller + 1,
-        showButton: false,
       }));
     } else {
       const getRanking = JSON.parse(localStorage.getItem('ranking'));
       const getRankingLength = getRanking.length - 1;
       const actualGame = { ...getRanking[getRankingLength], score };
-      localStorage.setItem('ranking', JSON.stringify([actualGame]));
+      getRanking.pop();
+      localStorage.setItem('ranking', JSON.stringify([...getRanking, actualGame]));
     }
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
@@ -107,8 +104,8 @@ class Gameplay extends Component {
   }
 
   render() {
-    const { results, controller, showButton } = this.state;
-    const { stopTimer, timer } = this.props;
+    const { results, controller } = this.state;
+    const { stopTimer, timer, btnDisable } = this.props;
     const nullNumber = -1;
     const encodeUtf8 = (string) => {
       // função do Lucas Rodrigues Turma 08
@@ -125,7 +122,7 @@ class Gameplay extends Component {
             results={ results[controller] }
           />
           { !stopTimer ? <Timer /> : <div>{ timer }</div> }
-          { showButton
+          { btnDisable
             ? (
               <button
                 type="button"
@@ -144,15 +141,18 @@ class Gameplay extends Component {
 Gameplay.propTypes = {
   dispatchStopInterval: PropTypes.func.isRequired,
   dispatchController: PropTypes.func.isRequired,
+  dispatchDisableBtn: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
   gravatarEmail: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   stopTimer: PropTypes.bool.isRequired,
+  btnDisable: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchStopInterval: () => dispatch(stopInterval()),
   dispatchController: (data) => dispatch(nextQuestion(data)),
+  dispatchDisableBtn: () => dispatch(disableButton()),
 });
 
 const mapStateToProps = (state) => ({
@@ -161,6 +161,7 @@ const mapStateToProps = (state) => ({
   name: state.userReducer.name,
   gravatarEmail: state.userReducer.email,
   controller: state.triviaReducer.globalController,
+  btnDisable: state.triviaReducer.btnDisable,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gameplay);

@@ -38,6 +38,7 @@ const triviaReducer = (state = INITIAL_STATE, action) => {
       score: action.data.data,
       timer: 30,
       counterStoped: false,
+      btnDisable: false,
     };
   case RESET_GAME:
     return INITIAL_STATE;
