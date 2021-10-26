@@ -2,9 +2,30 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import './Feedback.css';
 
-export default class Feedback extends Component {
+import { connect } from 'react-redux';
+import { resetGame } from '../redux/actions';
+
+class Feedback extends Component {
+  constructor(props) {
+    super(props);
+
+    this.resetGameAndRedirectToHome = this.resetGameAndRedirectToHome.bind(this);
+    this.resetGameAndRedirectToRanking = this.resetGameAndRedirectToRanking.bind(this);
+  }
+
+  resetGameAndRedirectToHome() {
+    const { dispatchResetGame, history } = this.props;
+    dispatchResetGame();
+    history.push('/');
+  }
+
+  resetGameAndRedirectToRanking() {
+    const { dispatchResetGame, history } = this.props;
+    dispatchResetGame();
+    history.push('/ranking');
+  }
+
   render() {
-    const { history } = this.props;
     const getStorage = JSON.parse(localStorage.getItem('state'));
     const { player: { score, assertions } } = getStorage;
     const numberOfAssertions = 3;
@@ -29,14 +50,14 @@ export default class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-play-again"
-          onClick={ () => history.push('/') }
+          onClick={ this.resetGameAndRedirectToHome }
         >
           Jogar novamente
         </button>
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={ () => history.push('/ranking') }
+          onClick={ this.resetGameAndRedirectToRanking }
         >
           Ranking
         </button>
@@ -46,7 +67,14 @@ export default class Feedback extends Component {
 }
 
 Feedback.propTypes = {
+  dispatchResetGame: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchResetGame: () => dispatch(resetGame()),
+});
+
+export default connect(null, mapDispatchToProps)(Feedback);

@@ -21,7 +21,10 @@ class Mainpage extends Component {
 
 Mainpage.propTypes = {
   globalController: PropTypes.number.isRequired,
-  history: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    history: PropTypes.string,
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
