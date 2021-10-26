@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Ranking.css';
 
 class Ranking extends Component {
   constructor(props) {
@@ -24,8 +25,8 @@ class Ranking extends Component {
         <td data-testid={ `player-score-${i}` }>{eachObj.score}</td>
       </tr>));
     return (
-      <div>
-        <h1 data-testid="ranking-title">RankingPage</h1>
+      <div className="container-section">
+        <h1 className="ranking-title" data-testid="ranking-title">Ranking</h1>
         <table>
           <tbody>
             { ranking }

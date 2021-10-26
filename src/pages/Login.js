@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { saveUser } from '../redux/actions';
 import { fecthAPITriviaToken } from '../services/TriviaAPI';
 import fetchGravatarAPI from '../services/GravatarAPI';
+import Logo from '../assets/img/trivia-logo.png';
 
 class Login extends Component {
   constructor(props) {
@@ -94,22 +95,31 @@ class Login extends Component {
     return (
       <>
         <main>
-          <input
-            type="text"
-            data-testid="input-player-name"
-            placeholder="Insira seu nome"
-            value={ name }
-            name="name"
-            onChange={ this.handleChange }
+          <img
+            alt="Trivia Fighter"
+            className="img-logo"
+            src={ Logo }
           />
-          <input
-            type="text"
-            data-testid="input-gravatar-email"
-            placeholder="Insira seu email"
-            value={ email }
-            name="email"
-            onChange={ this.handleChange }
-          />
+          <div className="container container-items">
+            <input
+              type="text"
+              data-testid="input-player-name"
+              placeholder="Insira seu nome"
+              value={ name }
+              name="name"
+              onChange={ this.handleChange }
+            />
+            <input
+              type="text"
+              data-testid="input-gravatar-email"
+              placeholder="Insira seu email"
+              value={ email }
+              name="email"
+              onChange={ this.handleChange }
+            />
+          </div>
+        </main>
+        <footer>
           <button
             data-testid="btn-play"
             type="button"
@@ -118,8 +128,6 @@ class Login extends Component {
           >
             Jogar
           </button>
-        </main>
-        <footer>
           <button
             type="button"
             data-testid="btn-settings"

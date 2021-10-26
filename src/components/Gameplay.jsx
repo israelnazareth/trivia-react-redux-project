@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
 import ButtonAnswer from './ButtonAnswer';
 import Timer from './Timer';
+// import { stopInterval, restartTimer, nextQuestion } from '../redux/actions';
+import './Gameplay.css';
 import { stopInterval, nextQuestion, disableButton } from '../redux/actions';
 
 class Gameplay extends Component {
@@ -115,8 +117,18 @@ class Gameplay extends Component {
     if (results.length > nullNumber) {
       return (
         <main>
-          <h2 data-testid="question-category">{results[controller].category}</h2>
-          <h3 data-testid="question-text">{encodeUtf8(results[controller].question)}</h3>
+          <h2
+            className="question-category"
+            data-testid="question-category"
+          >
+            {results[controller].category}
+          </h2>
+          <h3
+            className="question-text"
+            data-testid="question-text"
+          >
+            {results[controller].question}
+          </h3>
           <ButtonAnswer
             handleClick={ this.handleClick }
             results={ results[controller] }

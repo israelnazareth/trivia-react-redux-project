@@ -1,19 +1,32 @@
+header {
+  margin-top: 15vh;
+  margin-bottom: 10vh;
+}
+
 .header-container {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .avatar {
   flex-wrap: nowrap;
 }
 
+.avatar-player {
+  /* */
+}
+
 .header-player {
+  color: white;
   flex-wrap: wrap;
+  font-family: 'Press Start 2P', cursive;
   font-size: 1em;
 }
 
 .header-score {
+  color: white;
+  font-family: 'Press Start 2P', cursive;
   flex-wrap: wrap;
   font-size: 1.5em;
 }

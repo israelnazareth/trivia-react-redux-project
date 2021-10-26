@@ -1,0 +1,15 @@
+.container-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 15vh auto;
+}
+
+.ranking-title {
+  color: orange;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 10px;
+  margin-bottom: 1.8em;
+}

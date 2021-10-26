@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import './Feedback.css';
+
 import { connect } from 'react-redux';
 import { resetGame } from '../redux/actions';
 
@@ -28,15 +30,23 @@ class Feedback extends Component {
     const { player: { score, assertions } } = getStorage;
     const numberOfAssertions = 3;
     return (
-      <div>
-        <h1>Feedback Page</h1>
+      <div
+        className="container-feedback"
+      >
+        <h1
+          className="feedback-title"
+        >
+          Seu resultado
+        </h1>
         { assertions >= numberOfAssertions
-          ? <p data-testid="feedback-text">Mandou bem!</p>
-          : <p data-testid="feedback-text">Podia ser melhor...</p> }
-        <span>Você acertou: </span>
-        <span data-testid="feedback-total-question">{assertions}</span>
-        <span>Placar final: </span>
-        <span data-testid="feedback-total-score">{ score }</span>
+          ? <h2 className="phrase" data-testid="feedback-text">Mandou bem!</h2>
+          : <h3 data-testid="feedback-text">Podia ser melhor...</h3> }
+        <section className="score-section">
+          <span>Você acertou: </span>
+          <span data-testid="feedback-total-question">{assertions}</span>
+          <span>Placar final: </span>
+          <span data-testid="feedback-total-score">{ score }</span>
+        </section>
         <button
           type="button"
           data-testid="btn-play-again"
