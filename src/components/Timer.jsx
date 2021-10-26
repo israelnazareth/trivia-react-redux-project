@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveCounter, disableButton } from '../redux/actions';
+import { saveCounter, disableButton, stopInterval } from '../redux/actions';
 
 class Timer extends Component {
   constructor(props) {
@@ -10,33 +10,39 @@ class Timer extends Component {
     this.state = {
       timer: 30,
     };
+
+    this.saveTimeClick = this.saveTimeClick.bind(this);
   }
 
   componentDidMount() {
-    const { interval } = this.props;
+    const ONE_SECOND = 1000;
     this.intervalID = setInterval(() => {
       this.setState((prevState) => ({
         timer: prevState.timer - 1,
       }));
-    }, interval);
+    }, ONE_SECOND);
   }
 
-  componentDidUpdate(_, prevState) {
-    const { saveTime, dispatchBtnDisable } = this.props;
+  componentDidUpdate() {
+    const { saveTime, dispatchBtnDisable, dispatchStopInterval } = this.props;
+    const { timer } = this.state;
     const timeLimit = 0;
-    if (prevState.timer === timeLimit) {
+    if (timer === timeLimit) {
       saveTime(this.state);
-      this.timerSetState();
       dispatchBtnDisable(this.state);
+      dispatchStopInterval();
+      clearInterval(this.intervalID);
     }
-    saveTime(this.state);
   }
 
-  timerSetState() {
-    this.setState({
-      timer: 30,
-    });
+  componentWillUnmount() {
+    this.saveTimeClick();
     clearInterval(this.intervalID);
+  }
+
+  saveTimeClick() {
+    const { saveTime } = this.props;
+    saveTime(this.state);
   }
 
   render() {
@@ -51,17 +57,14 @@ class Timer extends Component {
 
 Timer.propTypes = {
   saveTime: PropTypes.func.isRequired,
-  interval: PropTypes.number.isRequired,
   dispatchBtnDisable: PropTypes.func.isRequired,
+  dispatchStopInterval: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   saveTime: (data) => dispatch(saveCounter(data)),
   dispatchBtnDisable: () => dispatch(disableButton()),
+  dispatchStopInterval: () => dispatch(stopInterval()),
 });
 
-const mapStateToProps = (state) => ({
-  interval: state.triviaReducer.interval,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Timer);
+export default connect(null, mapDispatchToProps)(Timer);

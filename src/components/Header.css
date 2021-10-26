@@ -1,0 +1,19 @@
+.header-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar {
+  flex-wrap: nowrap;
+}
+
+.header-player {
+  flex-wrap: wrap;
+  font-size: 1em;
+}
+
+.header-score {
+  flex-wrap: wrap;
+  font-size: 1.5em;
+}
