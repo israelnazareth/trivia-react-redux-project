@@ -8,7 +8,7 @@ class Timer extends Component {
     super(props);
 
     this.state = {
-      timer: 30,
+      timer: 5,
     };
 
     this.saveTimeClick = this.saveTimeClick.bind(this);
