@@ -10,8 +10,8 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      email: '',
+      name: 'Lucas',
+      email: 'lucas@trybe.com',
       avatar: '',
     };
 
@@ -34,7 +34,9 @@ class Login extends Component {
         gravatarEmail: email,
       } }));
 
-    localStorage.setItem('ranking', JSON.stringify([{
+    const getRanking = JSON.parse(localStorage.getItem('ranking'));
+    console.log(getRanking);
+    localStorage.setItem('ranking', JSON.stringify([...getRanking, {
       name,
       score: 0,
       picture: gravatar,
@@ -52,11 +54,7 @@ class Login extends Component {
         } }));
     }
     if (localStorage.getItem('ranking') === null) {
-      localStorage.setItem('ranking', JSON.stringify([{
-        name: '',
-        score: 0,
-        picture: '',
-      }]));
+      localStorage.setItem('ranking', JSON.stringify([]));
     }
   }
 
