@@ -1,0 +1,36 @@
+.container-feedback {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.feedback-title {
+  color: orange;
+  font-family: 'Press Start 2P', cursive;
+  margin-bottom: 1.5em;
+}
+
+.phrase {
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5em;
+  margin-bottom: 1.2em;
+}
+
+.score-section {
+  color: white;
+  display: flex;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.3em;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 5vh;
+  width: 70vw;
+}
+
+.score-section:nth-child(even) {
+  color: orange;
+}

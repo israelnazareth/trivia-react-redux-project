@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Ranking.css';
 
 class Ranking extends Component {
   render() {
     const { history } = this.props;
     return (
-      <div>
-        <h1 data-testid="ranking-title">RankingPage</h1>
+      <div className="container-section">
+        <h1 className="ranking-title" data-testid="ranking-title">Ranking</h1>
         <button
           type="button"
           data-testid="btn-go-home"

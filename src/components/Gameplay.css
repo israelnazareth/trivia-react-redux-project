@@ -1,0 +1,17 @@
+.question-category {
+  color: rgb(237, 180, 58);
+  flex-wrap: wrap;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.8em;
+  line-height: 1.5em;
+  text-shadow: 2px 2px rgb();
+}
+
+.question-text {
+  color: white;
+  flex-wrap: wrap;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.3em;
+  margin: 20px 0;
+  line-height: 2.1em;
+}
