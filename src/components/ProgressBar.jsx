@@ -18,3 +18,5 @@ ProgressBar.propTypes = {
 };
 
 export default ProgressBar;
+
+// componente feito a partir deste site https://dzuz14.medium.com/how-to-build-a-progress-bar-with-react-8c5e79731d1f

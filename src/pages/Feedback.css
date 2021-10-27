@@ -4,7 +4,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
-  margin: 30vh auto;
+  margin: 5vh auto;
 }
 
 .feedback-title {
@@ -21,15 +21,16 @@
 }
 
 .score-section {
-  color: white;
+  color: rgb(255, 253, 162);
   display: grid;
-  grid-template-columns: 1fr 1fr;
   font-family: 'Press Start 2P', cursive;
   font-size: 1.3em;
   gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  line-height: 1.5em;
   margin-bottom: 5vh;
-  width: 30vw;
   text-align: center;
+  width: 30vw;
 }
 
 .btn-align {

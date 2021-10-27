@@ -13,19 +13,15 @@ header {
   flex-wrap: nowrap;
 }
 
-.avatar-player {
-  /* */
-}
-
 .header-player {
-  color: white;
+  color: rgb(255, 253, 162);
   flex-wrap: wrap;
   font-family: 'Press Start 2P', cursive;
   font-size: 1em;
 }
 
 .header-score {
-  color: white;
+  color: rgb(255, 253, 162);
   font-family: 'Press Start 2P', cursive;
   flex-wrap: wrap;
   font-size: 1.5em;
