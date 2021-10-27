@@ -40,7 +40,7 @@ class Feedback extends Component {
         </h1>
         { assertions >= numberOfAssertions
           ? <h2 className="phrase" data-testid="feedback-text">Mandou bem!</h2>
-          : <h3 data-testid="feedback-text">Podia ser melhor...</h3> }
+          : <h3 className="phrase" data-testid="feedback-text">Podia ser melhor...</h3> }
         <section className="score-section">
           <span>Você acertou: </span>
           <p data-testid="feedback-total-question">{assertions}</p>
