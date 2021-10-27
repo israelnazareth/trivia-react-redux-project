@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactAudioPlayer from 'react-audio-player';
 import { saveUser } from '../redux/actions';
 import { fecthAPITriviaToken } from '../services/TriviaAPI';
 import fetchGravatarAPI from '../services/GravatarAPI';
 import Logo from '../assets/img/trivia-logo.png';
+import bgMusic from '../assets/sounds/sound_background-music.mp3';
 
 class Login extends Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class Login extends Component {
     this.disableButton = this.disableButton.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.setInitialLocalStorage = this.setInitialLocalStorage.bind(this);
+    this.playAudio = this.playAudio.bind(this);
   }
 
   componentDidMount() {
@@ -36,7 +39,6 @@ class Login extends Component {
       } }));
 
     const getRanking = JSON.parse(localStorage.getItem('ranking'));
-    console.log(getRanking);
     localStorage.setItem('ranking', JSON.stringify([...getRanking, {
       name,
       score: 0,
@@ -57,6 +59,10 @@ class Login extends Component {
     if (localStorage.getItem('ranking') === null) {
       localStorage.setItem('ranking', JSON.stringify([]));
     }
+  }
+
+  playAudio() {
+    new Audio(bgMusic).play();
   }
 
   handleChange({ target: { name, value } }) {
@@ -88,6 +94,7 @@ class Login extends Component {
     this.setLocalStorage(email, name, gravatar);
   }
 
+  // eslint-disable-next-line max-lines-per-function
   render() {
     const { history } = this.props;
     const { name, email } = this.state;
@@ -136,6 +143,14 @@ class Login extends Component {
             Settings
           </button>
         </footer>
+        <div className="player-login">
+          <ReactAudioPlayer
+            src={ bgMusic }
+            autoPlay
+            controls
+            volume={ 0.20 }
+          />
+        </div>
       </>
     );
   }

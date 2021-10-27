@@ -43,24 +43,27 @@ class Feedback extends Component {
           : <h3 data-testid="feedback-text">Podia ser melhor...</h3> }
         <section className="score-section">
           <span>Você acertou: </span>
-          <span data-testid="feedback-total-question">{assertions}</span>
+          <p data-testid="feedback-total-question">{assertions}</p>
           <span>Placar final: </span>
-          <span data-testid="feedback-total-score">{ score }</span>
+          <p data-testid="feedback-total-score">{ score }</p>
         </section>
-        <button
-          type="button"
-          data-testid="btn-play-again"
-          onClick={ this.resetGameAndRedirectToHome }
-        >
-          Jogar novamente
-        </button>
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ this.resetGameAndRedirectToRanking }
-        >
-          Ranking
-        </button>
+        <div>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={ this.resetGameAndRedirectToHome }
+          >
+            Jogar novamente
+          </button>
+          <button
+            className="btn-align"
+            type="button"
+            data-testid="btn-ranking"
+            onClick={ this.resetGameAndRedirectToRanking }
+          >
+            Ranking
+          </button>
+        </div>
       </div>
     );
   }

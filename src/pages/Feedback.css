@@ -4,7 +4,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
-  margin: 0 auto;
+  margin: 30vh auto;
 }
 
 .feedback-title {
@@ -16,19 +16,24 @@
 .phrase {
   color: white;
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.5em;
+  font-size: 2.5em;
   margin-bottom: 1.2em;
 }
 
 .score-section {
   color: white;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   font-family: 'Press Start 2P', cursive;
   font-size: 1.3em;
-  flex-direction: column;
   gap: 15px;
   margin-bottom: 5vh;
-  width: 70vw;
+  width: 30vw;
+  text-align: center;
+}
+
+.btn-align {
+  margin-left: 20px;
 }
 
 .score-section:nth-child(even) {

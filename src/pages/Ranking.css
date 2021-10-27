@@ -13,3 +13,19 @@
   letter-spacing: 10px;
   margin-bottom: 1.8em;
 }
+
+table {
+  font-family: 'Press Start 2P', cursive;
+  margin: 20px auto 40px;
+  width: 70%;
+}
+tr:nth-child(odd) {
+  background-color: rgb(30, 24, 97);
+}
+
+th, td{
+  color: rgb(255, 253, 162);
+  font-family: 'Press Start 2P', cursive;
+  padding: 20px;
+  text-align: center;
+}

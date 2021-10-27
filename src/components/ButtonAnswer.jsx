@@ -1,9 +1,25 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import audioChoose from '../assets/sounds/sound_move-grid.mp3';
 import './ButtonsAnswer.css';
 
 class ButtonAnswer extends Component {
+  constructor() {
+    super();
+
+    this.playAudio = this.playAudio.bind(this);
+    this.stopAudio = this.stopAudio.bind(this);
+  }
+
+  playAudio() {
+    new Audio(audioChoose).play();
+  }
+
+  stopAudio() {
+    new Audio(audioChoose).pause();
+  }
+
   render() {
     const { results, handleClick, btnDisable } = this.props;
     return (
@@ -13,6 +29,8 @@ class ButtonAnswer extends Component {
           type="button"
           data-testid="correct-answer"
           onClick={ handleClick }
+          onMouseEnter={ this.playAudio }
+          onMouseLeave={ this.stopAudio }
           disabled={ btnDisable }
         >
           {results.correct_answer}
@@ -24,6 +42,8 @@ class ButtonAnswer extends Component {
             type="button"
             data-testid={ `wrong-answer-${index}` }
             onClick={ handleClick }
+            onMouseEnter={ this.playAudio }
+            onMouseLeave={ this.stopAudio }
             disabled={ btnDisable }
           >
             { button }

@@ -32,7 +32,7 @@ body {
 }
 
 button {
-  color: white;
+  color: rgb(255, 253, 162);
   background-color: rgb(33, 28, 83);
   border: 4px solid rgba(200,200,200, 0.4);
   border-radius: 5px;
@@ -66,6 +66,7 @@ input {
   align-self: center;
   margin: 20vh auto 5vh;
   width: 50%;
+  animation: logo-sf2-anim 3s ease 1s 1 normal forwards;
 }
 
 footer {
@@ -82,4 +83,41 @@ main {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
+}
+
+.player-login {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.react-audio-player {
+  width: 7%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgb(99, 82, 251);
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-volume-slider-container,
+audio::-webkit-media-controls-volume-slider {
+  display: none;
+}
+
+
+
+/* Gerado com https://webcode.tools/generators/css/keyframe-animation */
+@keyframes logo-sf2-anim {
+  0% {
+    opacity: 0;
+    transform: rotate(-1080deg) scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
 }

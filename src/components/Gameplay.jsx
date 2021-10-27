@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchTriviaQuestions } from '../services/TriviaAPI';
+import encodeUtf8 from '../services/utf8';
 import ButtonAnswer from './ButtonAnswer';
 import Timer from './Timer';
-// import { stopInterval, restartTimer, nextQuestion } from '../redux/actions';
-import './Gameplay.css';
 import { stopInterval, nextQuestion, disableButton } from '../redux/actions';
+import './Gameplay.css';
+import ProgressBar from './ProgressBar';
+import audioClick from '../assets/sounds/sound_selected_sf2.mp3';
 
 class Gameplay extends Component {
   constructor(props) {
@@ -21,10 +23,20 @@ class Gameplay extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.totalScore = this.totalScore.bind(this);
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
+    this.playAudio = this.playAudio.bind(this);
+    this.stopAudio = this.stopAudio.bind(this);
   }
 
   componentDidMount() {
     this.fechting();
+  }
+
+  playAudio() {
+    new Audio(audioClick).play();
+  }
+
+  stopAudio() {
+    new Audio(audioClick).pause();
   }
 
   async fechting() {
@@ -35,6 +47,7 @@ class Gameplay extends Component {
   }
 
   handleClick({ target }) {
+    this.playAudio();
     const buttons = document.querySelectorAll('button');
     const { dispatchStopInterval, name, gravatarEmail, dispatchDisableBtn } = this.props;
     buttons.forEach((button) => {
@@ -109,34 +122,32 @@ class Gameplay extends Component {
     const { results, controller } = this.state;
     const { stopTimer, timer, btnDisable } = this.props;
     const nullNumber = -1;
-    const encodeUtf8 = (string) => {
-      // função do Lucas Rodrigues Turma 08
-      const stringUTF = unescape(encodeURIComponent(string));
-      return stringUTF.replace(/&quot;|&#039;/gi, '\'');
-    };
     if (results.length > nullNumber) {
       return (
         <main>
-          <h2
-            className="question-category"
-            data-testid="question-category"
-          >
-            {results[controller].category}
-          </h2>
-          <h3
-            className="question-text"
-            data-testid="question-text"
-          >
-            {results[controller].question}
-          </h3>
+          <div className="text-container">
+            <h2
+              className="question-category"
+              data-testid="question-category"
+            >
+              {encodeUtf8(results[controller].category)}
+            </h2>
+            <h3
+              className="question-text"
+              data-testid="question-text"
+            >
+              {encodeUtf8(results[controller].question)}
+            </h3>
+          </div>
           <ButtonAnswer
             handleClick={ this.handleClick }
             results={ results[controller] }
           />
-          { !stopTimer ? <Timer /> : <div>{ timer }</div> }
+          { !stopTimer ? <Timer /> : <ProgressBar percentage={ timer } /> }
           { btnDisable
             ? (
               <button
+                className="next-question"
                 type="button"
                 data-testid="btn-next"
                 onClick={ this.handleNextButtonClick }
