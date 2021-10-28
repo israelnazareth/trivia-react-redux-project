@@ -1,31 +1,31 @@
 .container-section {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   margin: 15vh auto;
 }
 
 .ranking-title {
   color: orange;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   letter-spacing: 10px;
   margin-bottom: 1.8em;
 }
 
 table {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   margin: 20px auto 40px;
   width: 70%;
 }
-tr:nth-child(odd) {
+
+tr:nth-child( odd ) {
   background-color: rgb(30, 24, 97);
 }
 
-th, td{
+th, td {
   color: rgb(255, 253, 162);
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   padding: 20px;
   text-align: center;
 }

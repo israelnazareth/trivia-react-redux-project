@@ -1,21 +1,20 @@
 .container-feedback {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   margin: 5vh auto;
 }
 
 .feedback-title {
   color: orange;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   margin-bottom: 1.5em;
 }
 
 .phrase {
   color: white;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   font-size: 2.5em;
   margin-bottom: 1.2em;
 }
@@ -23,7 +22,7 @@
 .score-section {
   color: rgb(255, 253, 162);
   display: grid;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   font-size: 1.3em;
   gap: 15px;
   grid-template-columns: 1fr 1fr;
@@ -37,6 +36,6 @@
   margin-left: 20px;
 }
 
-.score-section:nth-child(even) {
+.score-section:nth-child( even ) {
   color: orange;
 }

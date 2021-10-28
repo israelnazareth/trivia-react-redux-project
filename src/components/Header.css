@@ -1,6 +1,6 @@
 header {
-  margin-top: 15vh;
   margin-bottom: 10vh;
+  margin-top: 15vh;
 }
 
 .header-container {
@@ -16,13 +16,13 @@ header {
 .header-player {
   color: rgb(255, 253, 162);
   flex-wrap: wrap;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P' , cursive;
   font-size: 1em;
 }
 
 .header-score {
   color: rgb(255, 253, 162);
-  font-family: 'Press Start 2P', cursive;
   flex-wrap: wrap;
+  font-family: 'Press Start 2P' , cursive;
   font-size: 1.5em;
 }
