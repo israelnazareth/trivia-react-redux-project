@@ -7,6 +7,8 @@ import { fecthAPITriviaToken } from '../services/TriviaAPI';
 import fetchGravatarAPI from '../services/GravatarAPI';
 import Logo from '../assets/img/trivia-logo.png';
 import bgMusic from '../assets/sounds/sound_background-music.mp3';
+import InputLoginPage from '../components/Login/InputLoginPage';
+import BtnSettingsLoginPage from '../components/Login/BtnSettingsLoginPage';
 
 class Login extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class Login extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.setInitialLocalStorage = this.setInitialLocalStorage.bind(this);
     this.playAudio = this.playAudio.bind(this);
+    this.redirectToPageSettings = this.redirectToPageSettings.bind(this);
   }
 
   componentDidMount() {
@@ -79,6 +82,11 @@ class Login extends Component {
     return true;
   }
 
+  redirectToPageSettings() {
+    const { history } = this.props;
+    history.push('/settings');
+  }
+
   async handleClick() {
     this.setInitialLocalStorage();
     const { saveData, history } = this.props;
@@ -94,35 +102,25 @@ class Login extends Component {
     this.setLocalStorage(email, name, gravatar);
   }
 
-  // eslint-disable-next-line max-lines-per-function
   render() {
-    const { history } = this.props;
     const { name, email } = this.state;
     const disableFunction = this.disableButton();
     return (
       <>
         <main>
-          <img
-            alt="Trivia Fighter"
-            className="img-logo"
-            src={ Logo }
-          />
+          <img alt="Trivia Fighter" className="img-logo" src={ Logo } />
           <div className="container container-items">
-            <input
-              type="text"
-              data-testid="input-player-name"
-              placeholder="Insira seu nome"
-              value={ name }
+            <InputLoginPage
+              dataTestid="input-player-name"
               name="name"
-              onChange={ this.handleChange }
+              value={ name }
+              handleChange={ this.handleChange }
             />
-            <input
-              type="text"
-              data-testid="input-gravatar-email"
-              placeholder="Insira seu email"
-              value={ email }
+            <InputLoginPage
+              dataTestid="input-gravatar-email"
               name="email"
-              onChange={ this.handleChange }
+              value={ email }
+              handleChange={ this.handleChange }
             />
           </div>
         </main>
@@ -135,13 +133,7 @@ class Login extends Component {
           >
             Jogar
           </button>
-          <button
-            type="button"
-            data-testid="btn-settings"
-            onClick={ () => history.push('/settings') }
-          >
-            Settings
-          </button>
+          <BtnSettingsLoginPage redirect={ this.redirectToPageSettings } />
         </footer>
         <div className="player-login">
           <ReactAudioPlayer
