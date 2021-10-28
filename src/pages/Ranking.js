@@ -20,7 +20,7 @@ class Ranking extends Component {
     objRanking.sort((a, b) => b.score - a.score);
     const ranking = objRanking.map((eachObj, i) => (
       <tr key={ i }>
-        <td><img scr={ eachObj.picture } alt={ eachObj.name } /></td>
+        <td><img src={ eachObj.picture } alt={ eachObj.name } /></td>
         <td data-testid={ `player-name-${i} ` }>{eachObj.name}</td>
         <td data-testid={ `player-score-${i}` }>{eachObj.score}</td>
       </tr>));

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveCounter, disableButton, stopInterval } from '../redux/actions';
+import ProgressBar from './ProgressBar';
 
 class Timer extends Component {
   constructor(props) {
@@ -47,9 +48,10 @@ class Timer extends Component {
 
   render() {
     const { timer } = this.state;
+    const ONE_SECOND_IN_PERCENTAGE = 3.33;
     return (
       <div>
-        { timer }
+        <ProgressBar percentage={ timer * ONE_SECOND_IN_PERCENTAGE } />
       </div>
     );
   }

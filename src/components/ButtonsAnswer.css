@@ -1,7 +1,7 @@
 ul {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 30px;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   width: 70%;
 }
